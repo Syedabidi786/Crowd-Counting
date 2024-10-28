@@ -1,0 +1,657 @@
+/* ===== App Layout ===== */
+.App {
+  display: flex; /* Ensures the sidebar and main content are side by side */
+  height: 100vh; /* Full viewport height */
+}
+
+/* Main content that adapts to screen width */
+.main-content {
+  flex: 1; /* Takes the rest of the width after the sidebar */
+  padding: 20px;
+  background-color: #f3f4f6; /* Background for the main content area */
+  overflow-y: auto; /* Enable scrolling if content overflows */
+}
+
+/* ===== Sidebar ===== */
+.sidebar {
+  background-color: #fff;
+  border-radius: 10px;
+  width: 200px;
+  height: 100vh; /* Full height for the sidebar */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  padding-top: 30px;
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
+  margin-bottom: 20px;
+}
+
+.sidebar-logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.sidebar-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #374151;
+}
+
+.sidebar-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.sidebar-menu-item {
+  width: 100%;
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  border-radius: 5px;
+  color: #374151;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.sidebar-link:hover {
+  background-color: #e5f0ff;
+}
+
+.sidebar-icon {
+  margin-right: 10px;
+  font-size: 18px;
+}
+
+/* ===== Page Layout (General for all pages like Home, Reports, etc.) ===== */
+.page-container {
+  width: 96%;
+  padding: 20px;
+}
+
+/* ===== Dashboard Page (Home.js) ===== */
+.dashboard-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-top-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.dashboard-bottom-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+/* Adjusting bar graph container */
+.bar-graph-container {
+  flex: 1;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 60%; /* Ensure it takes full width of the space */
+}
+
+/* =============== Heading Bar ============= */
+/* Main container for the heading */
+.heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 10px 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 95%; /* Updated width to cover entire page */
+  margin-bottom: 20px; /* Added margin-bottom for spacing */
+}
+
+/* Styling for the title (Dashboard) */
+.heading-title {
+  font-size: 18px;
+  font-weight: 500;
+  color: #374151;
+  margin: 0;
+}
+
+/* Styling for the profile image */
+.heading-profile-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* ============== Total Count Card ============== */
+.card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 400px;
+  height: 100px;
+  margin-top: 20px;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+
+.title {
+  font-size: 14px;
+  color: #6b7280;
+  margin: 0;
+}
+
+.count {
+  font-size: 24px;
+  color: #374151;
+  font-weight: bold;
+  margin: 0;
+}
+
+.icon-container {
+  background-color: #22c55e; /* Restored green background */
+  border-radius: 8px;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon {
+  color: #fff;
+  font-size: 24px;
+}
+
+/* Locations card in Home Page (matching size of Total Count Card) */
+.location-count-card {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 300px; /* Matching the width of Total Count Card */
+  height: auto;
+  margin-bottom: 20px;
+}
+
+/* ================ Locations Page (Updated) =============== */
+.locations-container {
+  display: flex;
+  flex-direction: column;
+  background-color: #f3f4f6;
+  padding: 20px;
+  overflow: hidden; /* Remove extra scrollbars */
+  width: 97%;
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.locations-content {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+  width: 95%;
+  max-width: 100%;
+}
+
+.locations-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.locations-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #374151;
+}
+
+.locations-actions {
+  display: flex;
+  gap: 15px;
+  padding-right: 50px;
+}
+
+.locations-action {
+  font-size: 14px;
+  color: #374151;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.search-input {
+  padding: 5px;
+  border: 1px solid #e5e7eb;
+  border-radius: 5px;
+}
+
+.filter-section {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.filter-input,
+.filter-select {
+  padding: 5px;
+  border: 1px solid #e5e7eb;
+  border-radius: 5px;
+}
+
+.location-table {
+  width: 95%;
+  border-collapse: collapse;
+}
+
+.location-table th {
+  text-align: left;
+  font-size: 14px;
+  color: #6b7280;
+  padding-bottom: 10px;
+}
+
+.location-table th:nth-child(2),
+.location-table td:nth-child(2) {
+  text-align: right;
+}
+
+.location-table td {
+  padding: 15px 0;
+  border-bottom: 1px solid #e5e7eb;
+  vertical-align: middle;
+}
+
+.location-info {
+  display: flex;
+  align-items: center;
+}
+
+.profile-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.location-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* New Add Location Section */
+.add-location {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 10px;
+}
+
+.add-location input[type="text"] {
+  padding: 8px;
+  border: 1px solid #e5e7eb;
+  border-radius: 5px;
+  font-size: 14px;
+  flex: 1;
+}
+
+.add-location button {
+  background-color: #22c55e; /* Green for add action */
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-location button:hover {
+  background-color: #16a34a; /* Darker green on hover */
+}
+
+/* Location Item Actions (Update and Delete) */
+.location-item-actions {
+  display: flex;
+  gap: 10px;
+  margin-left: auto; /* Aligns actions to the right of the row */
+}
+
+.update-button,
+.delete-button {
+  background-color: #3b82f6; /* Blue for update */
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 6px 10px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.update-button:hover {
+  background-color: #2563eb; /* Darker blue for hover */
+}
+
+.delete-button {
+  background-color: #ef4444; /* Red for delete */
+}
+
+.delete-button:hover {
+  background-color: #dc2626; /* Darker red for hover */
+}
+
+/* Editable Location Name */
+.location-name-input {
+  border: 1px solid #e5e7eb;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 14px;
+  width: 120px;
+  margin-right: 10px;
+}
+
+/* ================================================================================================================ */
+/* Locations Page - Add, Update, and Delete Location Functionalities */
+
+/* Main container for the Locations page */
+.locations-container {
+  display: flex;
+  flex-direction: column;
+  background-color: #f3f4f6;
+  padding: 20px;
+  overflow: hidden;
+  width: 97%;
+}
+
+/* Main content area */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Locations content container */
+.locations-content {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+  width: 95%;
+  max-width: 100%;
+}
+
+/* Header styling for Locations title and actions */
+.locations-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.locations-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #374151;
+}
+
+/* Actions container for search and filter */
+.locations-actions {
+  display: flex;
+  gap: 15px;
+}
+
+/* Search and filter styles */
+.locations-action {
+  font-size: 14px;
+  color: #374151;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.search-input {
+  padding: 5px;
+  border: 1px solid #e5e7eb;
+  border-radius: 5px;
+}
+
+.filter-section {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.filter-input,
+.filter-select {
+  padding: 5px;
+  border: 1px solid #e5e7eb;
+  border-radius: 5px;
+}
+
+/* Add Location Section */
+.add-location {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 10px;
+}
+
+.add-location input[type="text"] {
+  padding: 8px;
+  border: 1px solid #e5e7eb;
+  border-radius: 5px;
+  font-size: 14px;
+  flex: 1;
+}
+
+.add-location button {
+  background-color: #22c55e;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-location button:hover {
+  background-color: #16a34a;
+}
+
+.error-message {
+  color: #ef4444;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+/* Location List Styling */
+.location-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.location-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.location-item:last-child {
+  border-bottom: none;
+}
+
+/* Profile Image */
+.profile-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+/* Location Name and People Count */
+.location-name {
+  font-weight: bold;
+  margin-right: auto; /* Push the people count to the right */
+  color: #374151;
+}
+
+.location-people {
+  margin-left: 20px; /* Space between name and people count */
+  color: #6b7280;
+}
+
+/* Update and Delete Button Actions */
+.location-item-actions {
+  display: flex;
+  gap: 10px;
+  margin-left: 20px; /* Space between people count and actions */
+}
+
+.update-button,
+.delete-button {
+  background-color: #3b82f6;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 6px 10px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.update-button:hover {
+  background-color: #2563eb;
+}
+
+.delete-button {
+  background-color: #ef4444;
+}
+
+.delete-button:hover {
+  background-color: #dc2626;
+}
+
+
+/* ================================================================================================================ */
+
+/* ================== Reports Page ================ */
+.reports-container {
+  display: flex;
+  flex-direction: column;
+  background-color: #f3f4f6;
+  min-height: 100vh;
+  padding: 10px;
+  overflow: hidden; /* Remove extra scrollbars */
+  width: 98%;
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.location-selector-actions{
+  margin-bottom: 30px;
+}
+
+.location-selector-container {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+  width: 95%;
+  max-width: 100%;
+}
+
+.location-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.location-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.location-selector-title{
+  font-family: 'Roboto';
+}
+
+.location-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+  margin-left: 20px;
+}
+
+/* Moving Select All checkbox and Download button to the right side */
+.report-controls {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.download-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 30px;
+}
+
+.download-button:hover {
+  background-color: #0056b3;
+}
+
+.download-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}

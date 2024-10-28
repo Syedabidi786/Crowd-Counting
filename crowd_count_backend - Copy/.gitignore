@@ -1,0 +1,52 @@
+# Python Bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environment
+venv/
+.env/
+
+# Environment Variables and Config
+*.env
+.env.*
+
+# Logs
+*.log
+*.txt
+
+# Python Packages
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# Jupyter Notebooks Checkpoints
+.ipynb_checkpoints
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# Model Files (Large Binary Files)
+*.pt
+*.h5
+
+# Batch or Shell Scripts
+*.sh
+
+# IDE Configurations (VSCode, PyCharm, etc.)
+.vscode/
+.idea/
+
+# pytest
+.cache/
+.pytest_cache/
+
+# Coverage Reports
+htmlcov/
+.coverage
+
+# Temporary Files
+*.tmp
+*.temp
