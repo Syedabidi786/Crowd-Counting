@@ -6,7 +6,7 @@ import {
   addLocation,
   deleteLocation,
   updateLocation,
-  uploadFrame  // Make sure to include uploadFrame if you're using it
+  uploadFrame
 } from '../api';
 import axios from 'axios';
 
@@ -20,12 +20,11 @@ function Locations() {
   const [newLocationName, setNewLocationName] = useState('');
   const [addLocationError, setAddLocationError] = useState('');
   const [cameraOpen, setCameraOpen] = useState(false);
-  const [activeLocationId, setActiveLocationId] = useState('');
+  const [activeLocationId, setActiveLocationId] = useState(null);
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
   const captureIntervalRef = useRef(null);
 
-  // Fetch all locations
   const getLocations = async () => {
     try {
       const data = await fetchAllLocations();
@@ -35,7 +34,6 @@ function Locations() {
     }
   };
 
-  // Call getLocations on component mount
   useEffect(() => {
     getLocations();
   }, []);
@@ -61,7 +59,7 @@ function Locations() {
       await addLocation(newLocation);
       setNewLocationName('');
       setAddLocationError('');
-      await getLocations(); // Refetch all locations after adding a new one
+      await getLocations();
     } catch (error) {
       setAddLocationError('Failed to add location');
     }
@@ -70,7 +68,7 @@ function Locations() {
   const handleDeleteLocation = async (locationId) => {
     try {
       await deleteLocation(locationId);
-      await getLocations(); // Refetch all locations after deletion
+      await getLocations();
     } catch (error) {
       console.error("Failed to delete location:", error);
     }
@@ -82,7 +80,7 @@ function Locations() {
       const updatedLocation = { ...locations[index], name: newName };
       try {
         await updateLocation(locations[index]._id, updatedLocation);
-        await getLocations(); // Refetch all locations after update
+        await getLocations();
       } catch (error) {
         console.error("Failed to update location:", error);
       }
@@ -100,7 +98,6 @@ function Locations() {
   };
   const filteredLocations = locations.filter(applySearch);
 
-  // Open the camera for a specific location
   const handleOpenCamera = (locationId) => {
     console.log("Opening camera for location:", locationId);
     setActiveLocationId(locationId);
@@ -109,41 +106,40 @@ function Locations() {
       navigator.mediaDevices.getUserMedia({ video: true })
         .then((stream) => {
           videoRef.current.srcObject = stream;
-          startCapture();
         })
         .catch((err) => console.error("Error accessing the camera:", err));
     }
   };
 
-  // Close the camera and stop capture
   const handleCloseCamera = () => {
     setCameraOpen(false);
     clearInterval(captureIntervalRef.current);
     if (videoRef.current && videoRef.current.srcObject) {
       videoRef.current.srcObject.getTracks().forEach(track => track.stop());
     }
-    setActiveLocationId(''); // Clear the active location ID
+    setActiveLocationId(null);
   };
 
-  // Start capturing frames every 5 seconds
-  const startCapture = () => {
-    captureIntervalRef.current = setInterval(() => {
-      captureImage();
-    }, 5000); // Capture every 5 seconds
-  };
-
-  const captureImage = () => {
+  const captureImage = (locationId) => {
     const video = videoRef.current;
     const canvas = canvasRef.current;
+
+    if (!canvas || !video || !locationId) {
+      console.warn("Capture attempt skipped due to invalid video, canvas, or locationId");
+      return;
+    }
+
     const context = canvas.getContext('2d');
     canvas.width = video.videoWidth;
     canvas.height = video.videoHeight;
     context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
     const imageDataUrl = canvas.toDataURL('image/jpeg');
-    sendImageToBackend(imageDataUrl, activeLocationId);
+    sendImageToBackend(imageDataUrl, locationId);
   };
 
   const sendImageToBackend = async (imageDataUrl, locationId) => {
+    console.log("Sending image for location ID:", locationId);
     if (!locationId) {
       console.error("No location ID provided for sending image.");
       return;
@@ -152,7 +148,7 @@ function Locations() {
       const blob = await fetch(imageDataUrl).then(res => res.blob());
       const formData = new FormData();
       formData.append("file", blob, "webcam.jpg");
-      formData.append("locationId", locationId); // Explicitly send location ID
+      formData.append("locationId", locationId);
       await axios.post(`http://localhost:8000/api/frames/${locationId}`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
@@ -162,10 +158,17 @@ function Locations() {
     }
   };
 
-  // Cleanup when component unmounts
+  // This effect starts and stops the capture interval based on cameraOpen and activeLocationId
   useEffect(() => {
-    return () => handleCloseCamera();
-  }, []);
+    if (cameraOpen && activeLocationId) {
+      captureIntervalRef.current = setInterval(() => {
+        captureImage(activeLocationId);
+      }, 5000);
+
+      // Cleanup on unmount or when camera is closed
+      return () => clearInterval(captureIntervalRef.current);
+    }
+  }, [cameraOpen, activeLocationId]);
 
   return (
     <div className="locations-container">
@@ -249,14 +252,11 @@ function Locations() {
         </div>
       </div>
 
-      {/* Webcam Preview */}
       {cameraOpen && (
-        <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', backgroundColor: 'rgba(0,0,0,0.8)', zIndex: 1000 }}>
-          <video ref={videoRef} autoPlay style={{ width: '100%', maxHeight: '500px' }}></video>
-          <button onClick={handleCloseCamera} style={{ padding: '10px 20px', backgroundColor: '#FF5733', color: 'white', position: 'absolute', top: 10, right: 20, zIndex: 1001 }}>
-            Close Camera
-          </button>
-          <canvas ref={canvasRef} style={{ display: 'none' }}></canvas>
+        <div style={{ position: 'fixed', bottom: 0, right: 0 }}>
+          <video ref={videoRef} autoPlay style={{ width: '200px' }} />
+          <canvas ref={canvasRef} style={{ display: 'none' }} />
+          <button onClick={handleCloseCamera} style={{ margin: '10px' }}>Close Camera</button>
         </div>
       )}
     </div>

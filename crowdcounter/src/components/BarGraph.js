@@ -32,7 +32,7 @@ function BarGraph() {
   }, []);
 
   return (
-    <div style={{ width: '450px', height: 350, padding: '10px 10px 20px 10px' }}>
+    <div style={{ width: '450px', height: 350, padding: '10px 10px 70px 10px' }}>
       <h3 style={{ textAlign: 'center', marginBottom: '20px', fontFamily: "'Roboto Condensed', sans-serif" }}>
         Locations Analytics
       </h3>
