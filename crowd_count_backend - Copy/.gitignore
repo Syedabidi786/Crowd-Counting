@@ -13,7 +13,6 @@ venv/
 
 # Logs
 *.log
-*.txt
 
 # Python Packages
 *.egg-info/
